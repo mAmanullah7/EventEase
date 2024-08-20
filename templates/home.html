@@ -1,0 +1,77 @@
+{% extends 'user_base.html' %}
+
+{% block main %}
+
+<div class="fluid-container">
+    <div class="p-3 m-3">
+        <p class="display-6 text-center"><em>Discover, book and enjoy!!</em></p>
+    </div>
+    {% if shows | length() == 0 %}
+    <div class="row m-4 p-3">
+        <div class="col d-flex flex-column justify-content-center">
+            <p class="h4 text-center text-danger">We apologize for any inconvenience caused. Unfortunately, no reservations are currently available. Please consider visiting us again in the future.</p>
+        </div>
+    </div>
+    {% endif %}
+    <div class="d-flex flex-column">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                {% for show in shows | sort(attribute='timing',reverse=True) %}
+                <div class="card shadow m-3  bg-body-secondary">
+                    <div class="row">
+                        <div class="col-8 p-3 m-3">
+                            <div class="row">
+                                <div class="col">
+                                    <h5 class="card-title text-center">{{ show.show_name }}</h5>
+                                    <p class="card-text text-center"><em>{{ show.description }}</em></p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <p>Labels/Tags: <strong>{{ show.tags | upper() }}</strong></p>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 d-flex flex-column justify-content-center align-content-middle">
+                                    <p class="text-center">Date</p>
+                                    <p class="h5 text-center">{{ show.timing.date() }}</p>
+                                </div>
+                                <div class="col-4 d-flex flex-column justify-content-center align-content-middle">
+                                    <p class="text-center">Time</p>
+                                    <p class="h5 text-ceter align-self-center">{{ show.timing.time() }}</p>
+                                </div>
+                                <div class="col-4 d-flex flex-column justify-content-center align-content-middle">
+                                    <p class="text-center">Rating</p>
+                                    <p class="h5 text-ceter align-self-center">{{ show.rating }}/10</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class='row'>
+                                <div class="col justify-content-center">
+                                    <p class="text-center">Venue:<a href={{ url_for('venue_details',venue_id=show.venues.venue_id) }} class="text-dark"><span class="h5 p-2 m-2">{{ show.venues.venue_name }}</span></a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="vr"></div> -->
+                        <div class="col-3 d-flex flex-column justify-content-center align-content-middle">
+                            <div class="row justify-content-center">
+                                <div class="col p-2">
+                                    <a href={{ url_for('book',show_id = show.show_id) }} class="btn btn-primary align-content-center">
+                                        <div class="d-flex justify-content-center">
+                                            <span class="material-symbols-outlined p-1">
+                                            theater_comedy
+                                            </span> 
+                                            <span class="p-1">Book Show</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
