@@ -1,0 +1,130 @@
+{% extends 'admin_base.html' %}
+
+{% block main %}
+<div class="container-fluid m-2">
+    <div class="row m-1 justify-content-center">
+        <!-- venues -->
+        <div class="col justify-content-center">
+            <div class="m-2">
+                <span class="display-6">Venues</span>
+                <hr>
+            </div>
+            <div class="d-flex flex-wrap p-1 m-2 justify-content-start">
+                {% if current_user.venues %}
+                {% for venue in current_user.venues %}
+                <div class="card text-bg-light m-2 shadow" style="width: 20rem;">
+                    {% if venue.venue_img_url %}
+                    <img src={{ url_for('static',filename='images/venue_img/' + venue.venue_img_url.split("\\")[-1]) }}
+                        class="card-img-top" alt="Venue Image" height="200rem">
+                    {% else %}
+                    <img src={{ url_for('static',filename='images/venue_img/dummy.jpg' ) }} class="card-img-top"
+                        alt="Venue Image" height="200rem">
+                    {% endif %}
+                    <div class="card-body">
+                        <div>
+                            <h5 class="card-title text-center">{{ venue.venue_name }}</h5>
+                            <address class="text-center card-text"><em>{{ venue.location }}, {{ venue.address }}</em>
+                            </address>
+                        </div>
+                        <hr>
+                        <div class="row m-2">
+                            <div class="col-6 justify-content-center">
+                                <p class="text-center">Total Shows </p>
+                                <p class="display-6 text-center">{{ venue.shows | length() }}</p>
+                            </div>
+                            <div class="col-6 justify-content-center">
+                                <p class="text-center">Capacity</p>
+                                <p class="display-6 text-center">{{ venue.capacity }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-around">
+                            <a href={{ url_for('admin.edit_venue', venue_id=venue.venue_id) }}
+                                class="btn btn-secondary">Edit</a>
+                            <a href={{ url_for('admin.delete_venue', venue_id=venue.venue_id) }}
+                                class="btn btn-secondary">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="card text-bg-light m-1 shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <a class="btn btn-secondary m-3" href={{ url_for('admin.add_venue') }}>
+                            <div class="d-flex justify-content-center">
+                                <span class="material-symbols-outlined p-1">
+                                    add_box
+                                </span>
+                                <span class="p-1">New Venue</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row m-1 justify-content-center">
+        <!-- Shows -->
+        <div class="col m-2 justify-content-center">
+            <div class="m-2">
+                <span class="display-6">Shows</span>
+                <hr>
+            </div>
+            <div class="d-flex flex-wrap p-1 justify-content-start">
+                {% if current_user.shows %}
+                {% for show in current_user.shows | sort(attribute='timing',reverse=True) %}
+                <div class="card text-bg-light m-3 shadow" style="width: 19rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <h5 class="card-title text-center">{{ show.show_name }}</h5>
+                            <p class="card-text text-center"><em>{{ show.description }}</em></p>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4">
+                                <p class="text-center">Date</p>
+                                <h6 class="text-center"> {{ show.timing.date() }}</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-center">Time</p>
+                                <h6 class="text-center">{{ show.timing.time() }}</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-center">Ratings</p>
+                                <h5 class="text-center">{{show.rating}}/10</h5>
+                            </div>
+                        </div>
+                        <p class="text-center"><em>Venue: {{ show.venues.venue_name| upper() }}</em></p>
+                        <p class="text-center"><strong>Labels/Tags : {{ show.tags | upper() }}</strong></p>
+                        <hr>
+                        <div class="d-flex justify-content-around">
+                            <a href={{ url_for('admin.edit_show', show_id=show.show_id) }}
+                                class="btn btn-secondary">Edit</a>
+                            <a href={{ url_for('admin.delete_show', show_id=show.show_id) }}
+                                class="btn btn-secondary">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="card text-bg-light m-1 shadow" style="width: 15rem;">
+                    <div class="card-body">
+                        <a class="btn btn-secondary m-3" href={{ url_for('admin.add_show') }}>
+                            <div class="d-flex justify-content-center">
+                                <span class="material-symbols-outlined p-1">
+                                    add_box
+                                </span>
+                                <span class="p-1">New Show</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
