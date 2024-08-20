@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} ShowSpot - Home Page {% endblock %}
+
+{% block navbar_content %}
+<a class="nav-link " href={{ url_for('admin.admin_login') }}>Admin Login</a>                 
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid ">
+    <div class="d-flex justify-content-center m-5">
+        <!-- <img class="d-inline" src = {{ url_for("static",filename="images/logo/logo-no-background.png") }} width    = 450rem> -->
+        <span><h1 class="font-weight-bold d-inline">Welcome to ShowSpot</h1></span>
+    </div>
+    <div class="container-fluid text-center font-weight-lighter">
+        <p>Welcome to ShowSpot, the ultimate online ticketing platform for all your favorite events happening in various cities across the country.</p>
+        <p>At ShowSpot, we are dedicated to providing you with a hassle-free ticketing experience. Our easy-to-use platform allows you to search for events happening in your city or any other city, and purchase tickets quickly and securely.</p>
+       <p>With ShowSpot, you'll never miss out on your favorite events again. From concerts to sports games to theater performances, we have tickets for every type of event. And with our extensive network of venues across the country, you'll always find an event near you.</p>
+        <p>So why wait? Sign up for ShowSpot today and start enjoying a seamless, stress-free ticketing experience for all your favorite events.</p>
+    </div>
+    <div class="d-flex justify-content-center " >
+        <a href = {{ url_for('user_login') }} class="btn btn-secondary m-5">Sign In</a>
+        <a href = {{ url_for('user_register') }} class="btn btn-secondary m-5">Register</a>
+    </div>
+</div>
+{% endblock %} 
+

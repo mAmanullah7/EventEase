@@ -1,0 +1,8 @@
+flask
+flask-login
+flask-sqlalchemy
+sqlalchemy
+flask_bcrypt
+matplotlib
+flask_restful
+flask_cors
