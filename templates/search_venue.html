@@ -1,0 +1,72 @@
+{% extends 'user_base.html' %}
+
+{% block main %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center m-3 p-2">
+        <form method="POST" class="row justify-content-center">
+        <div class="col-9 m-2">
+            <input type="text" class="form-control" placeholder="Enter the location to serach for venues"
+                id="loc_search" name="loc_search">
+        </div>
+        <div class="col-2 m-2">
+            <button type="submit" class="btn btn-secondary">
+                <div class="d-flex justify-content-center">
+                    <span class="material-symbols-outlined p-1">
+                        search
+                    </span>
+                    <span class="p-1">Search</span>
+                </div>
+            </button>
+        </div>
+        </form>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col d-flex flex-wrap flex-row">
+            {% if venues | length() != 0 %}
+            {% for venue in venues %}
+            <div class="d-flex flex-wrap p-1 m-2 justify-content-center">
+                <div class="card text-bg-light m-2 shadow" style="width: 18rem;">
+                    {% if venue.venue_img_url %}
+                    <img src={{ url_for('static',filename='images/venue_img/' + venue.venue_img_url.split("\\")[-1]) }}
+                        class="card-img-top" alt="Venue Image" height="200rem">
+                    {% else %}
+                    <img src={{ url_for('static',filename='images/venue_img/dummy.jpg' ) }} class="card-img-top"
+                        alt="Venue Image" height="200rem">
+                    {% endif %}
+                    <div class="card-body">
+                        <div>
+                            <h5 class="card-title text-center">{{ venue.venue_name }}</h5>
+                            <address class="text-center card-text"><em>{{ venue.location }}, {{ venue.address }}</em>
+                            </address>
+                        </div>
+                        <hr>
+                        <div class="row m-2">
+                            <div class="col-6 justify-content-center">
+                                <p class="text-center">Total Shows </p>
+                                <p class="display-6 text-center">{{ venue.shows | length() }}</p>
+                            </div>
+                            <div class="col-6 justify-content-center">
+                                <p class="text-center">Capacity</p>
+                                <p class="display-6 text-center">{{ venue.capacity }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ url_for('venue_details',venue_id=venue.venue_id) }}">Click here for show details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %} 
+            <div class="container-fluid">
+                <p class="text-danger text-center">{{ error_msg | capitalize() }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
