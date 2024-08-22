@@ -1,0 +1,63 @@
+{% extends 'user_base.html' %}
+
+{% block main %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="card shadow m-3">
+                <div class="row">
+                    <div class="col p-3 m-1">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-center">{{ booking.show.show_name }}</h5>
+                                <p class="card-text text-center"><em>{{ booking.show.description }}</em></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4 d-flex flex-column justify-content-center align-content-middle">
+                                <p class="text-center">Date</p>
+                                <p class="h5 text-center">{{ booking.show.timing.date() }}</p>
+                            </div>
+                            <div class="col-4 d-flex flex-column justify-content-center align-content-middle">
+                                <p class="text-center">Time</p>
+                                <p class="h5 text-ceter align-self-center">{{ booking.show.timing.time() }}</p>
+                            </div>
+                            <div class="col-4 d-flex flex-column justify-content-center align-content-middle">
+                                <p class="text-center">Rating</p>
+                                <p class="h5 text-ceter align-self-center">{{ booking.show.rating }}/10</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                            <div class="col justify-content-center">
+                                <p class="text-center">Venue:<a href="" class="text-dark"><span class="h5 p-2 m-2">{{
+                                            booking.show.venues.venue_name }}</span></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center m-1">
+                    <div class="m-2 p-1">
+                        <p class="h5 text-center text-success">Congratulations!! you have successfully made the booking for the above show.</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-center h6">Booking ID</p>
+                        <p class="display-6 text-center">{{ booking.booking_id }}</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-center h6">Total Tickets Booked</p>
+                        <p class="display-6 text-center">{{ booking.tickets_booked }}</p>
+                    </div>
+                    <div class="col-4">
+                        <p class="text-center h6">Amount Paid</p>
+                        <p class="display-6 text-center">{{ booking.price_paid }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
