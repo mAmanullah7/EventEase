@@ -1,0 +1,106 @@
+{% extends 'user_base.html' %}
+
+{% block main %}
+
+<div class="row justify-content-center">
+    <div class="col-8 justify-content-center">
+        <!-- <div class="m-2">
+            <span class="display-6">Venues</span>
+            <hr>
+        </div> -->
+        <div class="d-flex flex-wrap flex-column p-1 m-2 justify-content-center">
+            <div class="card text-bg-light m-2 shadow" style="width: 35rem;">
+                {% if venue.venue_img_url %}
+                <img src={{ url_for('static',filename='images/venue_img/' + venue.venue_img_url.split("\\")[-1]) }}
+                    class="card-img-top" alt="Venue Image" height="200rem">
+                {% else %}
+                <img src={{ url_for('static',filename='images/venue_img/dummy.jpg' ) }} class="card-img-top"
+                    alt="Venue Image" height="200rem">
+                {% endif %}
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title text-center">{{ venue.venue_name }}</h5>
+                        <address class="text-center card-text"><em>{{ venue.location }}, {{ venue.address }}</em>
+                        </address>
+                    </div>
+                    <hr>
+                    <div class="row m-2">
+                        <div class="col-6 justify-content-center">
+                            <p class="text-center">Total Shows </p>
+                            <p class="display-6 text-center">{{ venue.shows | length() }}</p>
+                        </div>
+                        <div class="col-6 justify-content-center">
+                            <p class="text-center">Capacity</p>
+                            <p class="display-6 text-center">{{ venue.capacity }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <p class="text-center"> Scroll down to see all the shows on this venue</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-2">
+        <span class="display-6">Shows</span>
+        <hr>
+    </div>
+    <div class="row m-1 justify-content-center">
+        <!-- Shows -->
+        <div class="col-8 m-2 d-flex flex-wrap flex-column p-1 justify-content-center">
+            {% if venue.shows| length() !=0 %}
+            {% for show in venue.shows | sort(attribute='timing',reverse=True) %}
+            {% if show.timing >= today %}
+            <div class="card shadow m-3  bg-body-secondary justify-content-center">
+                <div class="row justify-content-center">
+                    <div class="col-8 p-3 m-3">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-center">{{ show.show_name }}</h5>
+                                <p class="card-text text-center"><em>{{ show.description }}</em></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <p>Labels/Tags: <strong>{{ show.tags | upper() }}</strong></p>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 d-flex flex-column justify-content-center align-content-middle">
+                                <p class="text-center">Date</p>
+                                <p class="h5 text-center">{{ show.timing.date() }}</p>
+                            </div>
+                            <div class="col-4 d-flex flex-column justify-content-center align-content-middle">
+                                <p class="text-center">Time</p>
+                                <p class="h5 text-ceter align-self-center">{{ show.timing.time() }}</p>
+                            </div>
+                            <div class="col-4 d-flex flex-column justify-content-center align-content-middle">
+                                <p class="text-center">Rating</p>
+                                <p class="h5 text-ceter align-self-center">{{ show.rating }}/10</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 d-flex flex-column justify-content-center align-content-middle">
+                        <div class="row justify-content-center">
+                            <div class="col p-2">
+                                <a href={{ url_for('book',show_id = show.show_id) }} class="btn btn-primary align-content-center">
+                                    <div class="d-flex justify-content-center">
+                                        <span class="material-symbols-outlined p-1">
+                                            theater_comedy
+                                        </span>
+                                        <span class="p-1">Book Show</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock main %}
