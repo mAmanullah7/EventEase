@@ -1,0 +1,16 @@
+{% extends 'user_base.html' %} 
+
+{% block main %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-6 d-flex flex-column justify-content-center">
+            <p class="text-center display-6 m-2">Booking Cancellation</p>
+            <hr>
+            <p class="text-center m-2 ">You have successfully cancelled you booking</p>
+            <a href={{ url_for('user_home') }} class="btn btn-primary align-content-center m-3 p-3">Go to Home Page</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
