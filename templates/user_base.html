@@ -1,0 +1,107 @@
+{% extends 'base.html' %} 
+
+{% block title %} User - Homepage{% endblock %}
+
+{% block head %} 
+{{ super() }}
+<!-- Google Icons -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0" />
+<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet"> -->
+{% endblock head %}
+
+
+{% block navbar_content %} 
+<a class="nav-link " href={{ url_for('user_home') }}>
+    <div class="d-flex justify-content-center">
+        <span class="material-symbols-outlined p-1">
+            account_circle
+        </span>
+        <p class="p-1">
+            {{ current_user.user_id }}
+        </p>
+    </div>
+</a>  
+<a class="nav-link justify-content-center" href = {{ url_for('user_logout') }}>
+    <div class="d-flex justify-content-center">
+        <span class="material-symbols-outlined p-1">
+        logout
+        </span> 
+        <span class="p-1">Logout</span>
+    </div>
+</a>      
+{% endblock navbar_content %}
+
+{% block body%} 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-9 justify-content-center">
+            <!-- mainbar content -->
+            {% block main %}  {% endblock %}
+        </div>
+        <div class="col-3 justify-content-center bg-body-tertiary">
+            <!-- sidebar content -->
+            <div class='row justify-content-center m-3'>
+                <div class="col d-flex flex-column">
+                    <img  class='rounded-circle align-self-center ' src = {{ url_for('static',filename='images/blank-profile-picture.png')}} width = 75rem>
+                    <span class = 'h4 mt-2 pt-2 align-self-center'>{{ current_user.name | upper }}</span>
+                    <span class = 'align-self-center'>{{ current_user.phone_no }}</span>
+                    <span class="align-self-center">{{ current_user.email_id }}</span>
+                    <address class="align-self-center mb-3 pb-3">{{ current_user.address }}</address>
+                </div>
+            </div>
+            <!-- <div class="row justify-content-center m-3">
+                <div class="col-6 d-flex flex-column">
+                    <span class="align-self-center">Bookings</span>
+                    <span class="display-6 align-self-center">0</span>
+                </div>
+                <div class="col-6 d-flex flex-column">
+                    <span class="align-self-center">Show Count</span>
+                    <span class="display-6 align-self-center">0</span>
+                </div>
+            </div> -->
+            <div class="row justify-content-center m-3">
+                <div class="col d-flex flex-column">
+                    <a class="btn btn-secondary m-3" href={{ url_for('user_home') }}>
+                        <div class="d-flex justify-content-center">
+                            <span class="material-symbols-outlined p-1">
+                                home
+                            </span> 
+                            <span class="p-1">Home Page</span>
+                        </div>
+                    </a>
+
+                    <a class="btn btn-secondary m-3" href= {{ url_for('search_venues') }}>
+                        <div class="d-flex justify-content-center">
+                            <span class="material-symbols-outlined p-1">
+                            search
+                            </span> 
+                            <span class="p-1">Search Venues</span>
+                        </div>
+                    </a>
+
+                    <a class="btn btn-secondary m-3" href={{ url_for('search_shows') }}>
+                        <div class="d-flex justify-content-center">
+                            <span class="material-symbols-outlined p-1">
+                            search
+                            </span> 
+                            <span class="p-1">Search Shows</span>
+                        </div>
+                    </a>
+
+                    <a class="btn btn-secondary m-3" href={{ url_for('booking_history') }}>
+                        <div class="d-flex justify-content-center">
+                            <span class="material-symbols-outlined p-1">
+                            history
+                            </span> 
+                            <span class="p-1">Booking History</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+{% endblock body %}
