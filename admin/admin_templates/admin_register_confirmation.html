@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} EventEase - New Admin Registeration {% endblock %} 
+
+{% block navbar_content %} 
+<a class="nav-link " href={{ url_for('index') }}>Home</a>  
+<a class="nav-link " href ={{ url_for('admin.admin_login') }}>Admin Login</a>
+{% endblock navbar_content %}
+
+{% block body%} 
+<div class="container-fluid justify-content-center">
+    <div class="row justify-content-center m-5">
+        <div class="col-6 shadow p-3">
+            <div class="row justify-content-center">
+                <div class="col-6 text-center">
+                    <h2>Sign Up</h2>
+                    <p>Sign up as admin user</p>
+                    <hr>
+                    <p class="">Congratulations !! You have registered your self at EventEase. Enjoy you time with us</p>
+                </div>
+            </div>
+            <div class="row justify-content-center m-4 text-center">
+                <a href={{ url_for('admin.admin_login') }} class="btn btn-secondary">Click here to Login!!</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
