@@ -1,0 +1,55 @@
+{% extends 'admin_base.html' %}
+
+{% block main %} 
+<div class="row justify-content-center">
+    <div class="col-9 justify-content-center shadow m-4">
+        <div class="row justify-content-center p-2">
+            <div class="col-4 justify-content-center">
+                <span class="display-6">Edit Venue</span>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3 p-2">
+            <div class="col-6 justify-content-center">
+                <p class="text-center">To modify the details of the venue with <strong>Venue ID : {{ venue.venue_id }}</strong>, please complete the form provided below. </p>
+                <hr>
+                <p class="text-danger text-center">{{ error_msg }}</p>
+            </div>
+        </div>
+        <form method="POST" class="row justify-content-center" accept-charset="UTF-8" enctype="multipart/form-data">
+            <div class="row m-1">
+                <div class="col">
+                    <label for="name" class="form-label">Venue Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter venue name" required value="{{ venue.venue_name }}">
+                </div>
+            </div>
+            <div class="row m-1">
+                <div class="col-4">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter location of venue " required value="{{ venue.location }}">
+                </div>
+                <div class="col-4">
+                    <label for="capacity" class="form-label">Total Capacity</label>
+                    <input type="text" class="form-control" id="capacity" name="capacity" placeholder="Total capacity of venue" required value="{{ venue.capacity }}">   
+                </div>
+                <div class="col-4">
+                    <label for="image" class="form-label">Upload Venue's image</label>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg">   
+                </div>
+            </div>
+            <div class="row m-1">
+                <div class="col">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter the Complete Address" value="{{ venue.address }}">   
+                </div>
+            </div>
+            <div class="row  m-1 justify-content-center">
+                <div class="col-1 justify-content-center align-content-center">                
+                    <button type="submit" class="btn btn-primary rounded">
+                        Edit
+                    </button>                
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
