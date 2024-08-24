@@ -1,0 +1,97 @@
+{% extends 'admin_base.html' %} 
+
+{% block main %} 
+<div class="row justify-content-center">
+    <div class="col-9 justify-content-center shadow m-4">
+        <div class="row justify-content-center p-2">
+            <div class="col-4 justify-content-center">
+                <p class="display-6 text-center">Edit Show</p>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3 p-2">
+            <div class="col-10 justify-content-center">
+                <p class="text-center">To modify the details of the show with Show ID <strong>{{ show.show_id }}</strong>, please complete the form provided below. </p>
+                <hr>
+                <p class="text-danger text-center">{{ error_msg }}</p>
+            </div>
+        </div>
+        
+        <form method="POST" class="row justify-content-center" accept-charset="UTF-8">
+            <div class="row m-1">
+                <div class="col">
+                    <label for="name" class="form-label">Show Title</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter title of your show"
+                        required value="{{ show.show_name }}">
+                </div>
+            </div>
+
+            <div class="row m-1">
+                <div class="col">
+                    <label for="description" class="form-label">Show description</label>
+                    <input type="text" class="form-control" id="description" name="description"
+                        placeholder="Brief description about the show." value='{{ show.description }}'>
+                </div>
+            </div>
+            <div class="row m-1">
+                <div class="col">
+                    <label class="form-label ml-2">Label tags for this show:</label>
+                    <div class="d-inline custom-checkbox m-2">
+                        <input type="checkbox" id="action" name="action" value="action" class="custom-control-input" {% if 'action' in show.tags %} checked {% endif %} >
+                        <label for="action" class="custom-control-label">Action</label>
+                    </div>
+                    <div class=" d-inline custom-checkbox m-2">
+                        <input type="checkbox" id="comedy" name="comedy" value="comedy" class="custom-control-input" {% if 'comedy' in show.tags %} checked {% endif %}>
+                        <label for="comedy" class="custom-control-label">Comedy</label>
+                    </div>
+                    <div class=" d-inline custom-checkbox m-2">
+                        <input type="checkbox" id="drama" name="drama" value="drama" class="custom-control-input" {% if 'drama' in show.tags %} checked {% endif %}>
+                        <label for="drama" class="custom-control-label">Drama</label>
+                    </div>
+                    <div class="d-inline custom-checkbox m-2">
+                        <input type="checkbox" id="romance" name="romance" value="romance" class="custom-control-input" {% if 'romance' in show.tags %} checked {% endif %}>
+                        <label for="romance" class="custom-control-label">Romance</label>
+                    </div>
+                    <div class=" d-inline custom-checkbox m-2">
+                        <input type="checkbox" id="thriller" name="thriller" value="thriller" class="custom-control-input" {% if 'thriller' in show.tags %} checked {% endif %}>
+                        <label for="thriller" class="custom-control-label">Thriller</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-1">
+                <div class="col">
+                    <label class="form-label" for="venue">Select the one or more venues for this show</label>
+                    <select class="form-control" multiple id="venue" name="venue" required disabled>
+                        {% for venue in current_user.venues %}
+                            <option value={{ venue.venue_id }} {% if venue.venue_id == show.venues.venue_id %} selected {% endif %} > {{ venue.venue_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="row m-1">
+                <div class="col-4">
+                    <label for="price" class="form-label">Ticket Price</label>
+                    <input type="text" class="form-control" id="price" name="price" placeholder="Price of one ticket of the show" value="{{ show.ticket_price }}">
+                </div>
+                <div class="col-4">
+                    <label for="timing" class="form-label">Show timing</label>
+                    <input type="datetime-local" id="timing" name="timing" class="form-control" required value="{{ show.timing }}">
+                </div>
+                <div class="col-4">
+                    <label for="rating" class="form-label">Rating (Out of 10)</label>
+                    <input type="text" class="form-control" id="rating" name="rating" placeholder="Rating of show (Out of 10)" value="{{ show.rating }}">
+                </div>
+            </div>
+
+            <div class="row  m-1 justify-content-center">
+                <div class="col-1 justify-content-center align-content-center">                
+                    <button type="submit" class="btn btn-primary rounded">
+                        Edit
+                    </button>                
+                </div>
+            </div>
+        </form> 
+    </div>
+</div>
+
+{% endblock %}
