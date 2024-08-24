@@ -1,0 +1,49 @@
+{% extends "admin_base.html" %}
+
+{% block main %}
+<div class="row justify-content-center">
+    <div class="col-9 justify-content-center shadow m-4">
+        <div class="row justify-content-center p-2">
+            <div class="col-4 justify-content-center">
+                <span class="display-6">Delete Venue</span>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3 p-2">
+            <div class="col-6 justify-content-center">
+                <hr>
+                <div class="card text-bg-light m-1 shadow" style="width: 24rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <h5 class="card-title text-center">{{ show.show_name }}</h5>
+                            <p class="card-text text-center"><em>{{ show.description }}</em></p>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4">
+                                <p class="text-center">Date</p>
+                                <h6 class="text-center"> {{ show.timing.date() }}</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-center">Time</p>
+                                <h6 class="text-center">{{ show.timing.time() }}</h6>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-center">Ratings</p>
+                                <h5 class="text-center">{{show.rating}}/10</h5>
+                            </div>
+                        </div>
+                        <p class="text-center"><em>Venue: {{ show.venues.venue_name| upper() }}</em></p>
+                        <p class="text-center"><strong>Labels/Tags : {{ show.tags | upper() }}</strong></p>
+                        <hr>
+                        <div class="d-flex flex-column justify-content-around">
+                            <p class="text-center m-1">Are you sure you want to delete this Show?</p>
+                            <a href="{{ url_for('admin.delete_show_confirm',show_id = show.show_id) }}" class="btn btn-primary m-2">Yes! Delete the Show</a>
+                            <a href="{{ url_for('admin.index') }}" class="btn btn-secondary m-2">No, Don't delete Show </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
