@@ -1,0 +1,30 @@
+{% extends 'admin_base.html' %} 
+
+{% block main %} 
+<div class="container-fluid">
+    <div class="row m-3 p-3">
+        <div class="col">
+            <p class="display-6">Summary Statistics</p>
+        </div>
+    </div>
+    <div class="row m-3 p-3">
+        <div class="col-6 d-flex flex-column shadow-lg">
+            <p class="text-center h4 m-2 p-2">Total Revenue</p>
+            <p class="display-5 text-center text-success m-2 p-2">{{ revenue }}</p>
+        </div>
+        <div class="col-6 d-flex flex-column shadow-lg">
+            <p class="text-center h4 m-2 p-2">Total Bookings</p>
+            <p class="display-5 text-center text-success m-2 p-2">{{ util }}</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        {% if graphs| length() != 0 %}
+        {% for graph in graphs %}
+            <div class="col-6" style="width:30rem">
+                <img src={{ url_for('static',filename='images/graphs/' + graph) }} class="m-1" style="width:30rem">
+            </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
