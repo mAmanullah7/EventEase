@@ -1,0 +1,29 @@
+{% extends "admin_base.html" %} 
+
+{% block main %} 
+<div class="row justify-content-center">
+    <div class="col-9 justify-content-center shadow m-4">
+        <div class="row justify-content-center p-2">
+            <div class="col-4 justify-content-center">
+                <span class="display-6">Show Details</span>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3 p-2">
+            <div class="col-6 justify-content-center">
+                <hr>
+                <p class="text-center"> The Show has been successfully added. Please click the button below to go to the homepage. </p>
+            </div>
+        </div>
+        <div class="row justify-content-center mb-3 p-2">
+            <div class="col-6 justify-content-center">
+                <a class="btn btn-secondary m-3" href={{ url_for('admin.index') }}>
+                    <div class="d-flex justify-content-center"> 
+                        <span class="p-1">Go to Homepage</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
