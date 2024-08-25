@@ -1,0 +1,348 @@
+openapi: 3.0.0
+info:
+  description: 
+    "
+    EventEase APIs is collection of RESTful APIs that can be used to interact with the backend database of EventEase Application.
+  
+  
+    **EventEase Application** is project undertaken to fulfill the course requirement of Application Development - I in  *BS in Data Sciene and its Application* degree offered by **Indian Institute of Technology, Madras**.
+  
+    
+  
+    All Copyrights reserved
+    <br><br>
+    <div>
+    <h3> Designed by Mohammad Amanullah, 22f3002721 <h3>
+    </div>
+    
+    "
+  version: 1.0.0
+  title: ShowSpot API
+  
+  contact:
+    name: Mohammad Amanullah
+    email: 22f3002721@ds.study.iitm.ac.in
+
+servers:
+  - url: 'http://127.0.0.1:5000'
+
+tags:
+  - name: "User"
+    description: "CRUD APIs for User Model"
+  - name: "Admin"
+    description: "CRUD APIs for Admin Model"
+  
+
+paths:
+  "/api/user/profile/{userId}":
+    description: End point to read, update user profile from User resource with user_id = userId.
+    get:
+      operationId: "USER_PROFILE_GET"
+      tags:
+        - User
+      description: "Operation to get user profile from USER resource with provided userid. "
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            example: "m.amanullah7"
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                title: user object
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    example: m.amanullah7
+                  name:
+                    type: string
+                    example: Mohammad Amanullah
+                  email_id:
+                    type: string
+                    example: "example@gmail.com"
+                  phone_number:
+                    type: integer
+                    example: 9999999999
+                  address:
+                    type: string
+                    example: 'Indian Embassy, New Delhi'
+        '404':
+          description : User not found
+        
+        '500':
+          description: Internal Server Error
+    delete:
+      operationId: "USER_DELETE"
+      tags:
+        - User
+      description: "Operation to delete USER resource with provided userId. "
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            example: raju
+      responses:
+        '200':
+          description: Successfully Deleted
+        '404':
+          description: User not found
+        '500':
+          description: Intenal Server Error
+    put:
+      operationId: "USER_PROFILE_PUT"
+      tags:
+        - User
+      description: Operations to update user profile in USER resource with provided userID
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            example: "rohit.rk0600" 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                  name:
+                    type: string
+                    example: Rohit Kumar
+                  email_id:
+                    type: string
+                    example: "example@gmail.com"
+                  phone_no:
+                    type: integer
+                    example: 9999999999
+                  address:
+                    type: string
+                    example: 'Indian Embassy, New Delhi'
+      responses:
+        '200':
+          description: Update Successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    example: rohitkumar.rk0600
+                  name:
+                    type: string
+                    example: Rohit Kumar
+                  email_id:
+                    type: string
+                    example: "example@gmail.com"
+                  phone_number:
+                    type: integer
+                    example: 9999999999
+                  address:
+                    type: string
+                    example: 'Indian Embassy, New Delhi'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  update_status:
+                    type: boolean
+                    example: false
+                  update_error:
+                    type: string
+                    example: 'INCORRECT404'
+                  error_msg:
+                    type: string
+                    example: "name required!!"
+        
+        '404' :
+          description: User not found
+        
+        '500':
+          description: Internal Serever Error
+                      
+  "/api/user/booking/{userId}":
+  
+    get:
+      operationId: "USER_ENGAGEMENT_GET"
+      tags:
+        - User
+      description: "Operation to get booking history of user with userId. "
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            example: "rohitkumar.rk0600"
+      responses:
+        '200':
+          description: Request Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/bookings"
+                  
+        '404':
+          description : User not found
+        
+        '500':
+          description: Internal Server Error
+  
+    
+  
+  #API definations for Admin Models
+  
+  /api/venues/admin/{userId}:
+    description: "Extract recents blogs by user with user id : userId"
+    get:
+      operationId: "VENUE_USER_GET"
+      tags:
+        - Admin
+      description: "Sends GET request to extract Venues hosted by admin with username as userId"
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            example: mohanlal.0600
+      responses:
+        "200":
+          description: Blogs fetched Successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/venues"
+        "404":
+          description: Admin with provided userId **Not Found**
+        
+        "500":
+          description: Internal Server Error
+  
+  /api/shows/admin/{userId}:
+    description: "Extract recents blogs by user with user id : userId"
+    get:
+      operationId: "Show_USER_GET"
+      tags:
+        - Admin
+      description: "Sends GET request to extract shows hosted by admin with username as userId"
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+            example: mohanlal.0600
+      responses:
+        "200":
+          description: Blogs fetched Successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/shows"
+        "404":
+          description: Admin with provided userId **Not Found**
+        
+        "500":
+          description: Internal Server Error
+          
+        
+components:
+  schemas:
+    bookings:
+      type: array
+      items:
+        $ref: '#/components/schemas/booking'
+        
+    booking:
+      properties:
+        booking_id:
+          type: integer
+          example: 3
+        show_id:
+          type: integer
+          example: 2
+        tickets_booked:
+          type: integer
+          example: 10
+        price_paid:
+          type: number
+          example: 1000
+    shows:
+      type: array
+      items:
+        $ref: '#/components/schemas/show'
+        
+    show:
+      properties:
+        show_id:
+          type: integer
+          example: 3
+        show_name:
+          type: string
+          example: Pathan
+        description:
+          type: string
+          example: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus velit animi quis iusto voluptates unde molestiae obcaecati quod, esse explicabo dolores, corporis eaque possimus culpa fuga earum veniam, eum similique."
+        timing:
+          type: string
+          example: '2022-04-31 16:00:00'
+        tags:
+          type: array
+          example: 
+            - Romance
+            - Action
+        venue:
+          type: array
+          items:
+            $ref: "#/components/schemas/venue"
+        ticket_price:
+          type: number
+          example: 700
+        rating:
+          type: number
+          example: 7.6
+          
+    venues:
+      type: array
+      items:
+        $ref: '#/components/schemas/venue'
+        
+    venue:
+      properties:
+        venue_id:
+          type: integer
+          example: 3
+        venue_name:
+          type: string
+          example: TJJ Auditorium
+        location:
+          type: string
+          example: Mumbai
+        address:
+          type: string
+          example: "Andheri Mumbai"
+        capcity:
+          type: integer
+          example: 700
+  
+
+  
+    
+    
+  
+  
+  
+  
