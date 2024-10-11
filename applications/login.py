@@ -1,4 +1,4 @@
-from main import login_manager,app
+from app import login_manager,app
 import flask
 from flask import request,render_template,redirect,url_for
 from flask_login import login_user,logout_user,current_user,login_required
