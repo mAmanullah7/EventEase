@@ -92,4 +92,8 @@
 +---eventease.sqlite3
 +---eventease_api.yaml
 
+<img width="1440" alt="Screenshot 2024-10-11 at 11 16 56 AM" src="https://github.com/user-attachments/assets/aa64c733-65bc-4e73-b855-cb79c076de95">
+
+
+
 
