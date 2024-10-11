@@ -6,7 +6,7 @@
   ```
 - After successful installation of the required modules, run the `main.py` file using the following command:
   ```
-  python main.py
+  python app.py
   ```
 - The app will be accessible at: `http://127.0.0.1:5000`. Use this URL to access the web application.
 - To run the API, refer to the `EventEase_api.yaml`.
