@@ -1,4 +1,4 @@
-###Chekout WebsiteImages -> WebsiteImages
+### Chekout WebsiteImages -> WebsiteImages
 
 ### Instructions to Run the Application
 
